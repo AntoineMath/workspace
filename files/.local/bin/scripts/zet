@@ -1,9 +1,19 @@
 #!/bin/bash
 
-TITLE=$@
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+ZET_REPO="${GHREPOS}/zet"
 
-FOLDER_NAME="$SCRIPTPATH/$(date -u +%y%m%d%H%m%S)"	
+if [ -z $GHREPOS ]; then
+	echo "FATAL: Add your GIT_REPO to the PATH and try again"
+	exit 1
+fi
+
+if ! [ -d $ZET_REPO ] 2>/dev/null; then
+	echo "FATAL: zet/ not found in GHREPOS(${GHREPOS}), clone zet in it, and try again"
+	exit 1
+fi
+
+TITLE=$@
+FOLDER_NAME="${ZET_REPO}/$(date -u +%y%m%d%H%m%S)"	
 README="$FOLDER_NAME/README.md"
 
 mkdir $FOLDER_NAME
@@ -17,5 +27,6 @@ echo "# $TITLE
 # Open the file
 vim $README
 
-
-echo "Done"
+cd $ZET_REPO
+git add $README && git commit -m "$TITLE" && git push
+cd --
