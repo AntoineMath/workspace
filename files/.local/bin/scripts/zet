@@ -1,0 +1,21 @@
+#!/bin/bash
+
+TITLE=$@
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+FOLDER_NAME="$SCRIPTPATH/$(date -u +%y%m%d%H%m%S)"	
+README="$FOLDER_NAME/README.md"
+
+mkdir $FOLDER_NAME
+
+#Template
+echo "# $TITLE
+
+
+## References" >> $README
+
+# Open the file
+vim $README
+
+
+echo "Done"
