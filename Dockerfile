@@ -10,7 +10,7 @@ RUN apt-get install -y \
 	software-properties-common \
 	apt-add-repository ppa:deadsnakes/ppa && \
 	apt-get install -y --no-install-recommends \
-	python3
+	python3 nodejs
 
 
 
