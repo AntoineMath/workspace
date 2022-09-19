@@ -28,5 +28,5 @@ echo "# $TITLE
 vim $README
 
 cd $ZET_REPO
-git add $README && git commit -m "$TITLE" && git push
+git add $README && git commit -m "created new zet: $(head -1 $README)" && git push
 cd --
